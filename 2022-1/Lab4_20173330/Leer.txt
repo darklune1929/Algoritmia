@@ -1,0 +1,2 @@
+La resolución de la pregunta 1 esta en el archivo abb.c al final y la estructura
+modificada en el ab.c.
