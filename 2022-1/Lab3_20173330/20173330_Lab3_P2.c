@@ -9,7 +9,7 @@ int calc_peso(int ini,int fin,int meteorito[LG][WG][HG],int max,int eje,int maxe
     //estoy calculando de acuerdo al eje seleccionado en los parametros sumando todos los 0 además del 1 donde esta el vibranium
     for(int eje1=0;eje1<maxeje1;eje1++){
         for(int eje2=0;eje2<maxeje2;eje2++){
-            for( ejebus=ini;ejebus<fin;ejebus++){
+            for( ejebus=ini;ejebus<=fin;ejebus++){
                 if(eje==0){
                     cont += meteorito[ejebus][eje1][eje2];
                     } else if(eje==1){
@@ -37,7 +37,7 @@ int buscarVibranium(int ini,int fin,int meteorito[LG][WG][HG],int *cortes,int ma
     //printf("%d",eje);
 
     //incremento la cantidad de cortes cada vez que pasa por aca asi llevando cuenta de esto
-    *(cortes)++;
+    (*cortes)++;
     if (peso_izq>peso_der) {
         return buscarVibranium(ini,currentMidPos,meteorito,cortes,max,maxeje1,maxeje2,eje);
     } else{
