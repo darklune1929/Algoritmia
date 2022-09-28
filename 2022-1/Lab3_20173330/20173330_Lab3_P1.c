@@ -1,22 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
-//8
-//10 20 15 10 12 10 13 18
-double calcular_indice_de_incremento(int ini,int fin,double* cantidades,int cont,int contmax){
-    int med = (ini+fin)/2;
+#define  max(a,b) ((a>b)? a:b)
+/* 8
+10 20 15 10 12 10 13 18 */
+int mezcla(int ini,int medio,int fin,int* cantidades){
+    int cizq=0,cder=0;
 
+    for(int i=medio;i>ini;i--){
+        if(cantidades[i]>cantidades[i-1]) cizq++;
+        else
+            break;
+    }
+    for(int i=medio;i<fin;i++){
+        if(cantidades[i+1]>cantidades[i]) cder++;
+        else
+            break;
+    }
+    return cder+cizq+1;
+}
+int intervaloMaximo(int ini,int fin,int* cantidades){
+    int medio,izq,der,centro;
+    if(ini==fin) return 1;
+
+    medio = (ini+fin)/2;
+    izq = (intervaloMaximo(ini,medio,cantidades));
+    der = (intervaloMaximo(medio+1,fin,cantidades));
+    centro = mezcla(ini,medio,fin,cantidades);
+
+    return max(max(izq,der),centro);
 }
 int main(){
-    int dias,cont=0,contmax=0;
+    int dias,maximo;
     printf("Ingrese la cantidad de dias: ");
     scanf("%d",&dias);
-    double cantidades[dias];
+    int cantidades[dias];
     for(int i=0;i<dias;i++){
-        scanf("%lf",&cantidades[i]);
+        scanf("%d",&cantidades[i]);
     }
     for(int i=0;i<dias;i++){
-        printf("%.2lf ",cantidades[i]);
+        printf("%d ",cantidades[i]);
     }
-    double indice = calcular_indice_de_incremento(0,dias-1,cantidades,cont,contmax);
+    maximo = intervaloMaximo(0,dias-1,cantidades);
+    double indice;
+    indice = (double)maximo*100/dias;
+    printf("\nEl maximo intervalo de contagios es %d dias con un indice de %0.3lf%%\n",maximo,indice);
 
 }
