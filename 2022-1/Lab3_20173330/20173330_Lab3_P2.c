@@ -80,7 +80,7 @@ int main(){
     //calc_peso no entra al ultimo for dado que ini seria 0 y fin tambien seria 0 por como esta la logica
     // se arregla con cambiar H-1 por H pero asi no tendria logica para el resto de casos
     int posz = buscarVibranium(0,H-1,meteorito,&cortes,H,L,W,2);
-    printf("Posicion del cubo de vibranio: (%d,%d,%d)\n",posx,posy,posz);
+    printf("Posicion del cubo de vibranio: (%d,%d,%d)\n",posx+1,posy+1,posz+1);
     // tampoco sé porque no esta sumando la cantidad de cortes aunque paso la direccion de memoria para poder modificarlo
     //en la funcion principal de buscarVibranium
     printf("Dinero invertido en cortes (en millones de USD): %d\n",cortes); 
