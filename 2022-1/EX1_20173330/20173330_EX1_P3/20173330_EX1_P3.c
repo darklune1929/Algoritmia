@@ -24,6 +24,7 @@ int main(){
     }
     int nuevo_proc;
     Nodo* recorrido = list.cabeza;
+    Nodo* aux = NULL;
     //recorro la lista hasta que no quede ningun nodo en ella
     while(recorrido!=NULL){
         //ejecuta un intervalo de tiempo indicando en que proceso se encuentra el recorrido
@@ -34,6 +35,7 @@ int main(){
             printf("Se completo proceso #%d\n",recorrido->elemento.num_proc);
             //se elimina el nodo que ya no tenga duración por procesar
             elimina_nodo(&list,recorrido->elemento);
+            recorrido = aux;
         }
         printf("Desea insertar un nuevo proceso? ");
         scanf("%d",&nuevo_proc);
@@ -44,14 +46,21 @@ int main(){
             printf("Indicar duracion del proceso #%d:",contador_proc);
             scanf("%d",&elemento.duracion);
             elemento.num_proc = contador_proc;
-            Nodo* nuevo_nodo = crear_nuevo_nodo(elemento,recorrido->sig);
-            recorrido->sig = nuevo_nodo;
+            if(recorrido==NULL){
+                Nodo* nuevo_nodo = crear_nuevo_nodo(elemento,list.cabeza);
+                list.cabeza = nuevo_nodo;
+            } else{
+                Nodo* nuevo_nodo = crear_nuevo_nodo(elemento,recorrido->sig);
+                recorrido->sig = nuevo_nodo;
+            }
         }
         //si estoy al final de la lista vuelvo a la cabeza para seguir recorriendo la lista
         //si no paso al siguiente nodo
         if(recorrido->sig==NULL){
+            aux=recorrido;
             recorrido = list.cabeza;
         }else{
+            aux = recorrido;
             recorrido = recorrido->sig;
         }
     }
