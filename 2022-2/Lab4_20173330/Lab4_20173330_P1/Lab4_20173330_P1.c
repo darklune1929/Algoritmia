@@ -15,6 +15,7 @@ void insertarArreglo(ArbolB* Arbol,int* datos,int indice,int max){
     insertarArreglo(&(*Arbol)->hijo_der,datos,indice+1,max);
 }
 void recorrerArbol(ArbolB Arbol,int peso,int* contador){
+    if(Arbol==NULL) return;
     int resto=peso;
     if(Arbol->elemento.bin==1){
         resto = peso-Arbol->elemento.numero;
@@ -22,7 +23,7 @@ void recorrerArbol(ArbolB Arbol,int peso,int* contador){
     if(resto==0){
         (*contador)++;
         return;
-    } 
+    }
     recorrerArbol(Arbol->hijo_izq,resto,contador);
     recorrerArbol(Arbol->hijo_der,resto,contador);
     return;
